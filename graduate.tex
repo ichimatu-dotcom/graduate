@@ -18,6 +18,10 @@
     \renewcommand\proofname{\bf 証明}
 
     \renewcommand{\qedsymbol}{$\blacksquare$}
+\newcommand{\SimpComp}{{\mathrm{SimpComp}}}
+\newcommand{\Fun}[2]{[#1,~#2]}
+\newcommand{\Vect}{{\mathrm{Vect}}}
+\newcommand{\SimpCompInc}{{\mathrm{SimpCompInc}}}
 
 \title{graduate book}
 \author{猪原　盛寿}
@@ -32,29 +36,48 @@
 良心に恥じぬということだけが、我々の確かな報酬である。\\
 ---セオドア・ソレンソン
 \section{背景 background}
-圏(対象、射、合成、結合法則、単位法則)\\
+
 \begin{dfn}
 圏(category)は,対象と射で構成する. 射は, 対象間に走る矢印. さらに次の三つの法則を満たす.
 \begin{enumerate}[(1)]
     \item 合成法則. 任意の対象$A, B, C$に対し, $A\rightarrow B, B\rightarrow C$の任意の射$f, g$は合成と呼ばれる演算, $g \circ f: A\rightarrow C$が成立する.
     \item 結合法則. 任意の対象$A, B, C, D$に対し, $A\rightarrow B, B\rightarrow C, C\rightarrow D$の任意の射$f, g, h$は次の等式を満たす. $(h \circ g) \circ f = h \circ (g \circ f)$  
-    \item 単位法則. 任意の対象$A$に対し, 恒等射と呼ばれる射$1_A:A\rightarrow A$が存在し, 次の等式を満たす. (ただし, $B$は任意の対象, $f$は$A\rightarrow B$の任意の射.) $f\circ 1_A = 1_B\circ f = f$  
+    \item 単位法則. 任意の対象$A$に対し, 恒等射と呼ばれる射$1_A:A\rightarrow A$が存在し, 次の等式を満たす. (ただし, $B$は任意の対象, $f$は$A\rightarrow B$の任意の射.) $f\circ 1_A = 1_B\circ f = f$  \\
 \end{enumerate}
 \end{dfn}
+
 \begin{hsk}
 まとめると圏とは, 対象と射からなり, 射が三つの法則を満たすものである.
 対象とは, 集合でいうところの要素のことである. しかし、対象に条件は存在しない. 物体でも現象でも, 何でも記号を記号を付けて対象とすることができる. A, ☆, 1, 〇, ...など. 
 射とは, 対象間に走る矢印のことである.対象同士を結ぶこと, 向きが存在すること, が条件である. $A \rightarrow B$, 〇$\rightarrow$☆, など. このときのA, 〇を始域といい, 反対にB, ☆は終域という.
 合成法則により, 仲介する対象を書かなくとも一本の射で表現できる. 結合法則により, 三つ以上の射の合成は合成する順番を考慮しなくてよい. 単位法則により\\
 \end{hsk}
+
 \begin{exam}
 対象を1,2,...の自然数全体, 射を$m\leqq n$ならば$m \rightarrow n$ ($m, n \in \mathbb{N}$)とする集まり$C$を考える. この集まりが(1)～(3)の法則を満たすか確認する. 
  \begin{enumerate}[(1)]
         \item 任意の自然数$i, j, k$に対し, $i\leqq j\leqq k$ならば$i\leqq k$より, $i\rightarrow j\rightarrow k$ならば$i\rightarrow k$となる射が存在する.
         \item 任意の自然数$i, j, k, l$に対し$i\leqq j\leqq k\leqq l$のとき, (1)より$i\rightarrow k$, $j \rightarrow l$なる射が存在し, さらに二つの射からそれぞれ同じ$i\rightarrow l$が導ける.
-        \item 任意の自然数$i, j$に対し$i\leqq j$のとき$i\rightarrow j$の射が存在する. さらに$i\leqq i$, $j\leqq j$より$i\rightarrow i$, $j\rightarrow j$が存在し, (1)より二つの射からそれぞれ同じ$i\rightarrow j$が導ける.
+        \item 任意の自然数$i, j$に対し$i\leqq j$のとき$i\rightarrow j$の射が存在する. さらに$i\leqq i$, $j\leqq j$より$i\rightarrow i$, $j\rightarrow j$が存在し, (1)より二つの射からそれぞれ同じ$i\rightarrow j$が導ける.\\
 \end{enumerate}
+\end{exam}
 
+\begin{dfn}
+    関手(functor)は, 対象と射についての関数で構成する. 圏$X$から圏$Y$への関手$F$は,
+    \begin{itemize}
+        \item 対象：$X$の各対象$A$を, $Y$の各対象$F(A)$に対応させる. ($A\longmapsto F(A)$)
+        \item 射：$X$の各射$f:A\rightarrow B$を, $Y$の各射$F(f): F(A)\rightarrow F(B)$に対応させる. ($f\longmapsto F(f)$) さらに以下の性質を満たす.
+        \begin{itemize}
+            \item[\labelitemi] $X$の任意の射, $f:A\rightarrow B, g:B\rightarrow C$に対して,$F(g\circ f) = F(g)\circ F(f)$
+            \item[\labelitemi] $X$の各恒等射, $1_A$に対して, $F(1_A) = 1_F(A)$\\
+        \end{itemize}
+    \end{itemize}
+\end{dfn}
+\begin{hsk}
+    関手とは, 圏と圏の間の射である. 準同型写像がその構造を保つように, 関手は圏としての構造を保つ射である. 対象と射にはそれぞれ必ず写し先があり, 合成は保たれる.\\
+\end{hsk}
+\begin{exam}
+    圏$P$を, 対象が1,2,...の自然数全体, 射は$m\leqq n$ならば$m \rightarrow n$の圏とする. 次に圏$\SimpComp$を, 対象が単体複体, 射が単体写像の圏とする. $P$からSimpCompへの射を考える.
 \end{exam}
 圏の例\\
 抽象単体複体\\
@@ -76,55 +99,55 @@ $i\rightarrow j \rightarrow k$ ならば,  $i\rightarrow k$ なる射が存在�
   \circlearrowleft i\xrightarrow[f]{} j\xrightarrow[g]{} k\xrightarrow[h]{} l 
 \end{equation}
 \\
-次に、$SimpComp$(単体複体の圏)を定義する。\\
+次に、$\SimpComp$(単体複体の圏)を定義する。\\
 対象：単体複体 (ex. $K, L$)\\
 射：単体写像   (ex. $K\rightarrow L$)\\
 写像の合成より、射の合成は定義できる。\\
 結合法則も同様に成り立つ。恒等写像は単体写像の一つなので、恒等射も存在し単位法則は満たされる。\\
-以上より、$SimpComp$は圏として定義できる。\\
-\\さらに、$Vect$(ベクトル空間の圏)を定義する。\\
+以上より、$\SimpComp$は圏として定義できる。\\
+\\さらに、$\Vect$(ベクトル空間の圏)を定義する。\\
 対象：ベクトル空間\\
 射：線形写像\\
-$SimpComp$と同様に、射が写像であることを利用し他の条件を満たす。\\
-以上より$Vect$を圏として定義する。\\
+$\SimpComp$と同様に、射が写像であることを利用し他の条件を満たす。\\
+以上より$\Vect$を圏として定義する。\\
 
 では,関手を考える。\\
 $$
 \begin{array}{llll}
-  F:& P & \longrightarrow & SimpComp \\
+  F:& P & \longrightarrow & \SimpComp \\
  & \rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$} \\
 \mbox{対象}:& i & \longmapsto & F(i)\\
 \mbox{　射}:& f & \longmapsto & F(f)
 \end{array}
 $$
-上記のように、$P$から$SimpComp$へ対象と射を対応させ、下記の二つの式を満たすものを関手$F$とする。\\
+上記のように、$P$から$\SimpComp$へ対象と射を対応させ、下記の二つの式を満たすものを関手$F$とする。\\
 $$
 \begin{array}{ll}
  F(f'\circ f) = F(f') \circ F(f)\\
  F(1_i) = 1_{F(i)}
 \end{array}
 $$\\
-同様に、$P \rightarrow Vect$の関手を定義する。\\
+同様に、$P \rightarrow \Vect$の関手を定義する。\\
 
 ここから、関手圏へ拡張する。\\
-$[P \quad SimpComp]$\\
-対象：$P$から$SimpComp$への関手\\
+$\Fun{P}{\SimpComp}$\\
+対象：$P$から$\SimpComp$への関手\\
 射：自然変換\\
 ”合成、結合法則、単位法則の確認”\\
 $K \rightarrow L$と$L \rightarrow M$のとき、$K\rightarrow M$が存在する。\\
 
 
-$[P \quad Vect]$も同様に行う。\\
+$\Fun{P}{\Vect}$も同様に行う。\\
 
-ここで、$[P \quad SimpComp]$から、$[P \quad Vect]$への関手を考える。\\
+ここで、$\Fun{P}{\SimpComp}$から、$\Fun{P}{\Vect}$への関手を考える。\\
 "関手の確認"\\
 
 
-さらに、$SimpComp$からフィルトレーションのみを抽出するため、射を包含写像のみに限定した$SimpCompInc$を定義したい。$SimpCompInc \subset SimpComp$\\
+さらに、$\SimpComp$からフィルトレーションのみを抽出するため、射を包含写像のみに限定した$\SimpCompInc$を定義したい。$\SimpCompInc \subset \SimpComp$\\
 "部分圏の確認"\\
 
 
-この$[P\quad SimpCompInc]$から$[P \quad Vect]$へ関手を考えることで、単体複体フィルトレーションのパーシステントホモロジーを計算できる。\\
+この$\Fun{P}{\SimpCompInc}$から$\Fun{P}{\Vect}$へ関手を考えることで、単体複体フィルトレーションのパーシステントホモロジーを計算できる。\\
 "関手の確認"
 
 \end{document}
