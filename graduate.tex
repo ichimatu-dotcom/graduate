@@ -24,6 +24,8 @@
 \newcommand{\Vect}{{\mathrm{Vect}}}
 \newcommand{\SimpCompInc}{{\mathrm{SimpCompInc}}}
 \newcommand{\grmodZ}{{\mathrm{grmod \mathbb{Z}_2[x]}}}
+\newcommand{\Hom}{{\mathrm{Hom}}}
+
 
 \title{graduate book}
 \author{猪原　盛寿}
@@ -36,37 +38,50 @@
 
 \section{導入 Introduction}
 良心に恥じぬということだけが、我々の確かな報酬である。\\
----セオドア・ソレンソン
+---セオドア・ソレンソン\\
+勇敢にもこの論文を手に取った全ての人に感謝を込めて
 \section{背景 background}
 
 \begin{dfn}
-圏(category)は,対象と射で構成する数学的構造. 射は, 対象間に走る矢印で, さらに以下三つの法則を満たす.
+圏(category)$X$とは以下の条件を満たす数学的構造である. 
+\begin{itemize}
+    \item 対象(object)の集まり ob($X$)
+    \item 射(morphism)の集まり Hom($A,B$)
+    (各対象$A, B$に対して$A$から$B$への射の集まりをHom($A, B$)とする)
+    \item 射の合成と呼ばれる関数$(\circ)$
+\end{itemize}
+\begin{equation}
+    \begin{array}{lllll}
+     \circ &: \Hom (B, C) &\times \Hom (A, B) &\rightarrow &\Hom (A, C)  \\
+         &    & (g,f) & \mapsto&  g\circ f
+\end{array}
+\end{equation}
+から構成され, 射は次の二つの法則を満たす.
 \begin{enumerate}[(1)]
-    \item 合成法則. 任意の対象$A, B, C$に対し, $A\rightarrow B, B\rightarrow C$の任意の射$f, g$は合成と呼ばれる演算, $g \circ f: A\rightarrow C$が成立する.
-    \item 結合法則. 任意の対象$A, B, C, D$に対し, $A\rightarrow B, B\rightarrow C, C\rightarrow D$の任意の射$f, g, h$は次の等式を満たす. $(h \circ g) \circ f = h \circ (g \circ f)$  
-    \item 単位法則. 任意の対象$A$に対し, 恒等射と呼ばれる射$1_A:A\rightarrow A$が存在し, 次の等式を満たす. (ただし, $B$は任意の対象, $f$は$A\rightarrow B$の任意の射.) $f\circ 1_A = 1_B\circ f = f$  
+    \item 結合法則. 任意の射$f\in \Hom(A,B), g\in \Hom(B,C), h\in \Hom(C,D),$は次の等式を満たす. $(h \circ g) \circ f = h \circ (g \circ f)$  
+    \item 単位法則. 任意の対象$A$に対し, 恒等射と呼ばれる射$1_A:A\rightarrow A$が存在し, 次の等式を満たす.  $f\circ 1_A = 1_B\circ f = f$  
 \end{enumerate}
-\end{dfn}
 \begin{equation}
     \begin{tikzcd}
     A\ar{r}{f} \ar[loop left,"1_A"] \ar[bend right=30,swap]{rr}{g\circ f}& B\ar{r}{g} \ar[bend left=30]{rr}{h\circ g}& C\ar{r}{h} & D
 \end{tikzcd}
 \end{equation}
+\end{dfn}
 
 \begin{hsk}
-まとめると圏とは, 対象と射からなり, 射が三つの法則を満たすものである.
-対象とは, 集合でいうところの要素のことである. しかし、対象に条件は存在しない. 物体でも現象でも, 何でも記号を記号を付けて対象とすることができる. A, ☆, 1, 〇, ...など. 
-射とは, 対象間に走る矢印のことである.対象同士を結ぶこと, 向きが存在すること, が条件である. $A \rightarrow B$, 〇$\rightarrow$☆, など. このときのA, 〇を始域といい, 反対にB, ☆は終域という.
-合成法則により, 仲介する対象を書かなくとも一本の射で表現できる. 結合法則により, 三つ以上の射の合成は合成する順番を考慮しなくてよい. 単位法則により"単位法則は本論文でどう活躍するだろう？"\\
+まとめると圏とは, 対象, 射, 射の合成からなり, 射が二つの法則を満たすものである.
+対象とは, 集合でいうところの要素のこと. A, ☆, 1, 〇, ...など集合や数字に限らない.
+射とは, 対象間に走る矢印のことで.対象同士を結ぶこと, 向きが存在すること, が条件となる. $A \rightarrow B$, 〇$\rightarrow$☆, などで$A$と$B$の間の射は一本とは限らない. このときのA, 〇を始域といい, 反対にB, ☆は終域という. 圏論が「関係性」の数学と呼ばれるように, 圏では主に射の方に着目する. 構成要素の一つに射の合成が入っている. 片方の終域ともう片方の始域が一致するとき, 二つの射を合成した射が一つ存在しなければならない. 圏$X$が$A\xrightarrow[]{a} B\xrightarrow[]{b} C$かつ, $A\xrightarrow[]{c} C$のとき, $c=b\circ a$である. 結合法則や単位法則は, 写像のそれと同様である. 
+\\
 \end{hsk}
 
 \begin{exam}
-対象を1,2,...の自然数全体, 射を$m\leqq n$ならば$m \rightarrow n$ ($m, n \in \mathbb{N}$)とする集まり$C$を考える. この集まりが(1)～(3)の法則を満たすか確認する. 
+対象を1,2,...の自然数全体, 射を$m\leqq n$ならば$m \rightarrow n$ ($m, n \in \mathbb{N}$)とする集まり$C$を考える.\\ ob($C$)$= \mathbb{N}$. $m\leqq n$のとき$\Hom (m, n)=\{m\rightarrow n\}$. $m>n$のとき$\Hom (m, n)=\{\}$. $l, m, n\in$ ob$(X)$, $l \rightarrow m \rightarrow n$ならば, $l\leqq m\leqq n$から$l\leqq n$より$l \rightarrow n$. よって射の合成は含まれている. では射が二つの法則を満たすか確認する. 
  \begin{enumerate}[(1)]
-        \item 任意の自然数$i, j, k$に対し, $i\leqq j\leqq k$ならば$i\leqq k$より, $i\rightarrow j\rightarrow k$ならば$i\rightarrow k$となる射が存在する.
-        \item 任意の自然数$i, j, k, l$に対し$i\leqq j\leqq k\leqq l$のとき, (1)より$i\rightarrow k$, $j \rightarrow l$なる射が存在し, さらに二つの射からそれぞれ同じ$i\rightarrow l$が導ける.
-        \item 任意の自然数$i, j$に対し$i\leqq j$のとき$i\rightarrow j$の射が存在する. さらに$i\leqq i$, $j\leqq j$より$i\rightarrow i$, $j\rightarrow j$が存在し, (1)より二つの射からそれぞれ同じ$i\rightarrow j$が導ける.\\
+        \item $k\rightarrow l\rightarrow m\rightarrow n$ならば, 合成により$k\rightarrow m$, $l \rightarrow n$が存在し, さらに二つの射を利用し同じ射$k\rightarrow n$が合成できる. よって射は結合法則を満たす.
+        \item $m\rightarrow n$ならば, $m\leqq m$より$m\rightarrow m$が存在し, $m\rightarrow m\rightarrow n$と$m\rightarrow n\rightarrow n$から同じ射$m\rightarrow n$が合成できる. よって, 射は単位法則を満たす.\\
 \end{enumerate}
+以上より, $C$は圏と定義できる.
 \end{exam}
 \begin{dfn}
     関手(functor)は, 対象と射についての射で構成し, 圏間をつなぐ射. 圏$X$から圏$Y$への射$F$は,以下の条件を満たすとき, 関手と呼ぶ.
@@ -176,7 +191,7 @@ $\grmodZ$とは以下のように定義する圏である.\\
 射：次数付き$\mathbb{Z}_2[x]$準同型写像\\
 法則について, 今回も写像を利用し詳細は割愛する.以上から$\grmodZ$は圏として定義する. 
 \noindent\\
-$\Vect_{\mathbb{Z}_2}$とは対象が係数$\mathbb{Z}_2[x]$のベクトル空間, 射が線形写像の圏である. $\Vect$では係数について言及しなかったが, 今回は係数が$\mathbb{Z}_2[x]$であることを留意したい.\\
+$\Vect_{\mathbb{Z}_2}$とは対象が係数$\mathbb{Z}_2$のベクトル空間, 射が線形写像の圏である. $\Vect$では係数について言及しなかったが, 今回は係数が$\mathbb{Z}_2$であることを留意したい.\\
 また, 前回同様$\Fun{P}{Vect_{\mathbb{Z}_2}}$も圏として定義する.\\
 \noindent\\
 ここで$\Fun{P}{Vect_{\mathbb{Z}_2}}$から$\grmodZ$への関手を考える.\\
