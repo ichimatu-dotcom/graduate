@@ -25,6 +25,7 @@
 \newcommand{\SimpCompInc}{{\mathrm{SimpCompInc}}}
 \newcommand{\grmodZ}{{\mathrm{grmod \mathbb{Z}_2[x]}}}
 \newcommand{\Hom}{{\mathrm{Hom}}}
+\newcommand{\ob}{{\mathrm{ob}}}
 
 
 \title{graduate book}
@@ -41,9 +42,9 @@
 ---セオドア・ソレンソン\\
 勇敢にもこの論文を手に取った全ての人に感謝を込めて
 \section{背景 background}
-
+数学には, 「関係性」に着目した極めて抽象的な分野が存在する. それは圏論である. 本稿では圏論の基礎的な三つの道具(圏, 関手, 自然変換)を定義し, 第3章へとつなげたい. 手始めに, 圏(category)の定義を確認する.
 \begin{dfn}
-圏(category)$X$とは以下の条件を満たす数学的構造である. 
+圏$X$とは以下の条件を満たす数学的構造である. 
 \begin{itemize}
     \item 対象(object)の集まり ob($X$)
     \item 射(morphism)の集まり Hom($A,B$)
@@ -71,31 +72,30 @@
 \begin{hsk}
 まとめると圏とは, 対象, 射, 射の合成からなり, 射が二つの法則を満たすものである.
 対象とは, 集合でいうところの要素のこと. A, ☆, 1, 〇, ...など集合や数字に限らない.
-射とは, 対象間に走る矢印のことで.対象同士を結ぶこと, 向きが存在すること, が条件となる. $A \rightarrow B$, 〇$\rightarrow$☆, などで$A$と$B$の間の射は一本とは限らない. このときのA, 〇を始域といい, 反対にB, ☆は終域という. 圏論が「関係性」の数学と呼ばれるように, 圏では主に射の方に着目する. 構成要素の一つに射の合成が入っている. 片方の終域ともう片方の始域が一致するとき, 二つの射を合成した射が一つ存在しなければならない. 圏$X$が$A\xrightarrow[]{a} B\xrightarrow[]{b} C$かつ, $A\xrightarrow[]{c} C$のとき, $c=b\circ a$である. 結合法則や単位法則は, 写像のそれと同様である. 
+射とは, 対象間に走る矢印のこと.対象同士を結ぶこと, 向きが存在すること, が条件となる. $A \rightarrow B$, 〇$\rightarrow$☆, などで$A$と$B$の間の射は一本とは限らない. このときのA, 〇を始域といい, 反対にB, ☆は終域という. 圏論が「関係性」の数学と呼ばれるように, 圏では射が主役となる. 構成要素の一つに射の合成が入っている. 片方の終域ともう片方の始域が一致するとき, 二つを合成した射が一つ存在しなければならない. 圏$X$が$A\xrightarrow[]{a} B\xrightarrow[]{b} C$かつ, $A\xrightarrow[]{c} C$のとき, $c=b\circ a$である. 結合法則や単位法則は, 写像のそれと同様である. 
 \\
 \end{hsk}
 
 \begin{exam}
-対象を1,2,...の自然数全体, 射を$m\leqq n$ならば$m \rightarrow n$ ($m, n \in \mathbb{N}$)とする集まり$C$を考える.\\ ob($C$)$= \mathbb{N}$. $m\leqq n$のとき$\Hom (m, n)=\{m\rightarrow n\}$. $m>n$のとき$\Hom (m, n)=\{\}$. $l, m, n\in$ ob$(X)$, $l \rightarrow m \rightarrow n$ならば, $l\leqq m\leqq n$から$l\leqq n$より$l \rightarrow n$. よって射の合成は含まれている. では射が二つの法則を満たすか確認する. 
+対象を1,2,...の自然数全体, 射を$m\leqq n$ならば$m \rightarrow n$ ($m, n \in \mathbb{N}$)とする集まり$C$を考える.\\ ob($C$)$= \mathbb{N}$. $m\leqq n$のとき$\Hom (m, n)=\{m\rightarrow n\}$. $m>n$のとき$\Hom (m, n)=\{\}$. $l, m, n\in$ ob$(X)$, $l \rightarrow m \rightarrow n$ならば, $l\leqq m\leqq n$から$l\leqq n$より$l \rightarrow n$. よって射の合成は含まれている. 次に射が二つの法則を満たすか確認する. 
  \begin{enumerate}[(1)]
         \item $k\rightarrow l\rightarrow m\rightarrow n$ならば, 合成により$k\rightarrow m$, $l \rightarrow n$が存在し, さらに二つの射を利用し同じ射$k\rightarrow n$が合成できる. よって射は結合法則を満たす.
-        \item $m\rightarrow n$ならば, $m\leqq m$より$m\rightarrow m$が存在し, $m\rightarrow m\rightarrow n$と$m\rightarrow n\rightarrow n$から同じ射$m\rightarrow n$が合成できる. よって, 射は単位法則を満たす.\\
+        \item $m\rightarrow n$ならば, $m\leqq m$より$m\rightarrow m$が存在し, $m\rightarrow m\rightarrow n$と$m\rightarrow n\rightarrow n$から同じ射$m\rightarrow n$が合成できる. よって, 射は単位法則を満たす.
 \end{enumerate}
-以上より, $C$は圏と定義できる.
+以上より, $C$は圏と定義できる.\\
 \end{exam}
+圏を定義出来たおかげで,対象と対象の関係性が射によって表せられるようになった. では圏と圏の関係性を表すときはどうすればよいだろうか？答えはシンプルで, もう一度射を伸ばせばよい. 圏論ではその射を, 「関手(functor)」と呼ぶ.
 \begin{dfn}
-    関手(functor)は, 対象と射についての射で構成し, 圏間をつなぐ射. 圏$X$から圏$Y$への射$F$は,以下の条件を満たすとき, 関手と呼ぶ.
+    $X, Y$を圏とする. 関手$F:X\rightarrow Y$は, 
     \begin{itemize}
-        \item 対象：$X$の各対象$A$を, $Y$の任意の対象に対応させる. ($A\longmapsto F(A)$)
-        \item 射：$X$の各射$f:A\rightarrow B$を, $Y$の任意の射$F(f): F(A)\rightarrow F(B)$に対応させる. ($f\longmapsto F(f)$) さらに以下の性質を満たす.
+        \item 対象についての関数：ob$(X)\rightarrow$ ob$(Y)$  $[A\mapsto F(A)]$
+        \item 射についての関数：$\Hom (A, B)\rightarrow \Hom (F(A), F(B))$  $[f\mapsto F(f)]$
     \end{itemize}
+からなり, 射についての関数が次の二つの公理を満たす.
     \begin{itemize}
-        \item[(1)] $X$の任意の射, $f:A\rightarrow B, g:B\rightarrow C$に対して,$F(g\circ f) = F(g)\circ F(f)$
-        \item[(2)] $X$の各恒等射, $1_A$に対して, $F(1_A) = 1_F(A)$
+        \item[(1)] 圏$X$で, $A\xrightarrow[]{f} B\xrightarrow[]{g} C$のとき, $F(g\circ f) = F(g)\circ F(f)$
+        \item[(2)] $A\in$ob$(X)$のとき, $F(1_A) = 1_F(A)$
     \end{itemize}
-    
-\end{dfn}
-
 \begin{equation}
     \begin{array}{llll}
          F:& X & \longrightarrow & Y \\
@@ -104,50 +104,60 @@
          \mbox{　射}:& f & \longmapsto & F(f)\\
     \end{array}
 \end{equation}
-\begin{hsk}
-    関手とは, 圏と圏の間の射である. 準同型写像がその構造を保つように, 関手は圏としての構造を保つ射である. 対象と射にはそれぞれ必ず写し先があり, さらに合成が保たれる.\\
-\end{hsk}
-\begin{exam}
-    圏$P$を, 対象が1,2,...の自然数全体, 射が$m\leqq n$ならば$m \rightarrow n$の圏とする. 次に圏$\SimpComp$を, 対象が単体複体, 射が単体写像の圏とする. では$P$からSimpCompへの射を考える. $P$の各対象を$\SimpComp$の任意の対象へ対応させ, 各射も同様に対応させる. この時, 以下の性質を満たすものを関手$F:P\rightarrow \SimpComp$として扱う.
-    \begin{itemize}
-        \item $P$の任意の射, $i\stackrel{f}{\to} j\stackrel{g}{\to} k$に対して, $F(g\circ f) = F(g)\circ F(f)$
-        \item $P$の各恒等射, $1_i:i\rightarrow i$に対して, $F(1_i) = 1_F(i)$\\
-    \end{itemize}
-\end{exam}
-
-\begin{dfn}
-    自然変換(natural transformation)は, 関手で写された対象同士をつなぐ射からなる, 関手間の射. 圏$X$から圏$Y$への関手$F,G$に対し, $F$から$G$への射$\alpha$は以下の条件を満たすとき, 自然変換と呼ぶ.
-    \begin{itemize}
-        \item $X$の各対象$A$に対し, $F(A)$から$G(A)$へ射を走らせる ($F(A)\xrightarrow[]{\alpha_A} G(A)$)
-        \item $X$の任意の射$A\stackrel{f}{\to} B$に対して, $G(A)\circ \alpha_A = \alpha_B\circ F(A)$
-    \end{itemize}
-   
 \end{dfn}
 
+\begin{hsk}
+    関手とは, 圏と圏の間の射である. 対象と射についての関数(射)で構成し, (1)で合成を(2)で単位法則を保存する. 準同型写像がその構造を保つように, 関手は圏としての構造を保つ射である. 以降は, 記号や矢印が増えるためメモ等で図を書くことをお願いしたい.\\
+\end{hsk}
+\begin{exam}
+    圏$C$を, 対象が1,2,...の自然数全体, 射が$m\leqq n$ならば$m \rightarrow n$の圏とする. 次に圏$D$を, 対象が単体複体, 射が単体写像の圏とする. では$C$から$D$への関手$F$を考える. $l, m, n\in\ob (C), $ $ L, M, N\in\ob(D)$とすると,\\ 
+    $\Hom (m, n)\rightarrow \Hom (F(m), F(n))$: $\Hom (m, n)=\{f_m\}$, $F(m)=M, F(n)=N$, $\Hom (M, N)=\{g, h\}$ならば, $F(f_m)=g$または$F(f_m)=h$となる必要がある.\\
+    次に射についての関数が次の二つの法則を満たすか確認する.\\
+    $F(l)=L, \Hom (L, M)=\{i,j\}$とすると, 
+    
+    \begin{itemize}
+        \item[(1)] 圏$C$で, $l\stackrel{f_l}{\to} m\stackrel{f_m}{\to} n$ならば, $F(f_m\circ f_l) =i かつ F(f_l)\circ F(f_m) = i, またはF(f_m\circ f_l) =j かつ F(f_l)\circ F(f_m) = j$のときのみ, この公理を満たす.
+        \item [(2)] $m\in$ob$(C)$で, $1_m:m\rightarrow m$ならば, $F(1_m) = 1_F(m)(=1_M)$のときのみ, この公理を満たす.
+    \end{itemize}
+    以上から, いくつかの条件を満たすとき$F$を関手と定義できる.\\
+\end{exam}
+関手のおかげで圏と圏の関係性を表せられるようになった. では関手と関手の関係性を表すときはどうすればよいだろうか？察しの良い読者はもうお気づきだろうが答えはやはりシンプルである. もう一度だけ射を伸ばそう, 圏論ではその射を「自然変換(natural transformation)」と呼ぶ.
+\begin{dfn}
+    $X, Y$を圏, $F, G$を$X$から$Y$への関手, とする.\\
+    $F$から$G$への自然変換$\alpha$とは,
+    \begin{itemize}
+        \item $Y$の射の族 ($F(A)\xrightarrow[]{\alpha_A} G(A)$, $A\in\ob(X)$)
+    \end{itemize}
+    からなり, この射の族が次の一つの等式を満たす.
+    \begin{itemize}
+        \item $A, B\in\ob(X), A\xrightarrow[]{f}B$ならば, $G(f)\circ \alpha_A = \alpha_B\circ F(f)$
+    \end{itemize}
+\end{dfn}
 \begin{equation}
 \begin{tikzcd}
-A
+X
 \arrow[r, bend left, "F"]
 \arrow[r, bend right, swap, "G"]
 \arrow[r, phantom, bend left, shift right=0.2ex, ""{name=U}]
 \arrow[r, phantom, bend right, shift left=0.2ex, swap, ""{name=D}]
-&B
+&Y
 \arrow[Rightarrow, from=U, to=D, "\alpha"]
 \end{tikzcd}
      \begin{tikzcd}
         F(A)\arrow{r}{F(f)} \arrow{d}{\alpha_A} & F(B)\arrow{d}{\alpha_B}\\
-        G(A)\arrow{r}{G(f)} & G(B)\\
+        G(A)\arrow{r}{G(f)} & G(B)
     \end{tikzcd}
 \end{equation}
-
 \begin{hsk}
-    自然変換とは関手と関手の間の射である. 関手が圏の構造を保ったように, 自然変換は関手の構造を保つ. 
+    自然変換とは関手と関手の間の射である. 対象についての関数で写された対象同士を結ぶ射で構成する. よってその射の全ては, 関手の終域の圏に帰属する. 満たされるべきただ一つの等式は, 射についての関数で写された射と自然変換の射について条件を課すものである. 上記右側の図において, $F(A)\rightarrow G(B)$について二通りの合成が可能となる. その二つの合成射が一致する必要が自然変換にはある.
 \end{hsk}
-
+\begin{exam}
+    
+\end{exam}
 \noindent\\
+
 抽象単体複体\\
 単体写像\\
-写像ならば射の法則は満たす?\\
 部分圏の定義?\\
 次数付き$Z_2[x]加群$\\
 $Z_2[x]$が体であり、$\Vect_{Z_2[x]}$がベクトル空間であること?\\
@@ -156,41 +166,24 @@ $Z_2[x]$が体であり、$\Vect_{Z_2[x]}$がベクトル空間であること?\
 
 
 \section{結果 Result}
-\noindent
-$P$とは以下のように定義する圏である.\\
-対象： 1,2,...,nの自然数  \\
-射： $i \leq j$ ならば,  $i\rightarrow j$ なる射がただ一つ存在. \\
-例 2.3.より, 射は定義2.1.(1)～(3)の法則を満たす. 以上から$P$を圏として定義する. \\
-$\SimpComp$(抽象単体複体の圏)とは以下のように定義する. \\
-対象：単体複体 (ex. $K, L$)\\
-射：単体写像   (ex. $K\rightarrow L$)\\
-(1)合成法則は, 写像の合成法則と同等のため満たされる. (2)結合法則についても同様. (3)単位法則は, 恒等写像と同等のため満たされる. 以上から$\SimpComp$を圏として定義する.\\
-$\Vect$(ベクトル空間の圏)とは対象がベクトル空間, 射が線形写像の圏である. 各法則については上記の$\SimpComp$同様に確認できる. 
-以上より$\Vect$を圏として定義する. \\
+$P$とは次のように定義する圏である.対象が1,2,...,nの自然数, 射が$i \leq j$ ならば,  $i\rightarrow j(i, j \in \mathbb{N})$とする. 前述の通り, 射の合成の存在と射が満たすべき二つの法則は満たされる. 以上から$P$を圏として定義する. \\
+$\SimpComp$とは次のように定義する. 対象が抽象単体複体, 射が単体写像とする. 写像が射としての性質をことごとく満たすため, ここで証明は割愛する. 以上から$\SimpComp$を圏として定義する.\\
+$\Vect$とは対象がベクトル空間, 射が線形写像の圏である. 各法則については上記の$\SimpComp$同様に確認できる. \\
 \noindent\\
 次に関手を考える.\\
-$P\rightarrow \SimpComp$とは, $P$から$\SimpComp$へ対象と射を対応させ, 定義2.4.(1)(2)を満たすものを関手とする. (例2.6.参照) \\
-同様に$P \rightarrow \Vect$の関手も定義する. "この関手の意味の追加"\\
-\noindent\\
+$P\rightarrow \SimpComp$とは, $P$から$\SimpComp$への関手である. 前述の通り, いくつかの条件を満たし定義される. 同様に$P \rightarrow \Vect$の関手も定義する. \\
 ここから関手を対象とした圏へ拡張する. \\
-$\Fun{P}{\SimpComp}$とは以下のように定義する圏である.\\
-対象：$P$から$\SimpComp$への関手\\
-射：自然変換\\
-自然変換は, 圏$\SimpComp$の射で構成されるため定義2.1.より(1)～(3)の法則は満たされる. 以上から$\Fun{P}{\SimpComp}$を圏として定義する. \\
-同様に$\Fun{P}{\Vect}$も圏として定義する. \\
+$\Fun{P}{\SimpComp}$とは次のように定義する圏である. 対象が$P$から$\SimpComp$への関手, 射が自然変換とする. 自然変換は, 圏$\SimpComp$の射で構成されるため, 射の合成の存在と射が満たすべき二つの法則は満たされる. 以上から$\Fun{P}{\SimpComp}$を圏として定義する. 同様に$\Fun{P}{\Vect}$も圏として定義する. \\
 \noindent\\
 この二つの圏の間の関手を考える. \\
-関手$\Fun{P}{\SimpComp}\rightarrow \Fun{P}{\Vect}$とは,対象と射を対応させ定義2.4.(1)(2)を満たすものである."この関手の意味の追加"\\
+$\Fun{P}{\SimpComp}\rightarrow \Fun{P}{\Vect}$とは一つの関手だが, これは単体複体からベクトル空間のホモロジーを計算することを表しているといえる.\\
 \noindent\\
-さらに, $\SimpComp$からフィルトレーションのみを抽出するため, 射を包含写像に限定した$\SimpCompInc$を定義する. $\SimpCompInc$とは対象が単体複体, 射が包含写像の圏である. 定義2.1.(1)～(3)の法則に関しては, 射が写像であるため前述の通り満たすとする. ここで, 圏$\SimpCompInc$の任意の射$A\xrightarrow[]{f} B$について$A, B, f\in \SimpComp$であることから, $\SimpCompInc\subset \SimpComp$といえる. 同様に $\Fun{P}{\SimpCompInc}\subset \Fun{P}{\SimpComp}$.\\
+さらに, $\SimpComp$からフィルトレーションのみを抽出するため, 射を包含写像に限定した$\SimpCompInc$を定義する. $\SimpCompInc$とは対象が単体複体, 射が包含写像の圏である. 圏SimpCompIncの対象, 射, 射の合成, 恒等射はいつでも圏SimpCompに属するため, その部分圏といえる. 同様に $\Fun{P}{\SimpCompInc}\subset \Fun{P}{\SimpComp}$.\\
+また$\Fun{P}{\SimpCompInc} \rightarrow \Fun{P}{\Vect}$とは一つの関手だが, これは単体複体のフィルトレーションからのベクトル空間のパーシステントホモロジーを計算することを表しているといえる. \\
+
+以上で, ベクトル空間でのパーシステントホモロジーの計算を圏論の言葉で書き表すことができた. ここからは, 次数付き$\mathbb{Z}_2[x]$加群でのパーシステントホモロジーの計算を圏論で表現し, その違いや関係性をあらわにしていきたい.\\
 \noindent\\
-この$\Fun{P}{\SimpCompInc}$から$\Fun{P}{\Vect}$への関手を考えることで, 単体複体フィルトレーションのパーシステントホモロジーを計算できる. "図の作成、まとめの文言、この先の展開"\\
-\noindent\\
-$\grmodZ$とは以下のように定義する圏である.\\
-対象：次数付き$\mathbb{Z}_2[x]$加群\\
-射：次数付き$\mathbb{Z}_2[x]$準同型写像\\
-法則について, 今回も写像を利用し詳細は割愛する.以上から$\grmodZ$は圏として定義する. 
-\noindent\\
+$\grmodZ$とは以下のように定義する圏である. 対象が次数付き$\mathbb{Z}_2[x]$加群, 射が次数付き$\mathbb{Z}_2[x]$準同型写像とする. 合成や法則については今回も写像を利用し詳細は割愛する. 以上から$\grmodZ$は圏として定義する. \\
 $\Vect_{\mathbb{Z}_2}$とは対象が係数$\mathbb{Z}_2$のベクトル空間, 射が線形写像の圏である. $\Vect$では係数について言及しなかったが, 今回は係数が$\mathbb{Z}_2$であることを留意したい.\\
 また, 前回同様$\Fun{P}{Vect_{\mathbb{Z}_2}}$も圏として定義する.\\
 \noindent\\
