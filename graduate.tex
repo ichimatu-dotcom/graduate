@@ -29,7 +29,7 @@
 
 
 \title{graduate book}
-\author{猪原　盛寿}
+\author{猪原 盛寿}
 \date{October 19th 2023}
 
 
@@ -154,36 +154,106 @@ X
 \begin{exam}
     
 \end{exam}
-\noindent\\
+\begin{dfn}
+    $f:K\rightarrow K'$が単体写像とは, $K$の各頂点を$K'$のある頂点に写し次の条件を満たすもののことである. 
+\begin{equation}
+    \forall\sigma =\{a_0,...,a_q\}\in K\Rightarrow \{f(a_0),...,f(a_q)\}\in K'
+\end{equation}
+\end{dfn}
+\begin{hsk}
+    ここで, 単体写像は単体を写すのではなく頂点のみを写すことに注意したい. 仮に単体そのものを写す写像を単体写像'とすると, 抽象単体複体の構造を保つことなく写像は機能を失ってしまう. また, 単体の次元の順序関係を保つ条件として, $\sigma\subseteq\tau \Rightarrow f(\sigma) \subseteq f(\tau)$を加えても次元の順序関係のみが保たれ, 単体としては遥か上の次元へと写すことが可能となってしまう. 結果的に, 抽象単体複体の構造をうまく保つ写像を作ろうとすれば, 上記のように頂点のみを写し条件として単体が保存されることを加えた定義になるのである.
+\end{hsk}
+\begin{dfn}
+    次数付き$\mathbb{Z}_2[x]$加群$M$とは, $\mathbb{Z}_2[x]$加群である$M$にアーベル群としての直和分解を与え, $x^jM_i\subset M_{i+j}$を満たすものである($i,j\in\mathbb{N}_0$).
+    \begin{equation}
+        M=\bigoplus_{i=0}^{\infty} M_i\notag
+    \end{equation}
+\end{dfn}
+\begin{dfn}
+    次数付き$\mathbb{Z}_2[x]$準同型写像とは, $M, N$を次数付き$\mathbb{Z}_2[x]$加群とすると, $f:M\rightarrow N$が$\mathbb{Z}_2[x]$準同型写像であって, $f(M_i)\subset N_i$を満たすものである.
+\end{dfn}
+\begin{dfn}
+    $\mathbb{Z}_2[x]$準同型写像とは, $M, N$を$\mathbb{Z}_2[x]$加群とすると, $f:M\rightarrow N$が次の条件を満たすものである. $(a, b\in M)$
+        \begin{flalign}
+             &(1) f(a+b) = f(a)+f(b)&\\
+             &(2) f(xa)= xf(a)& \notag
+        \end{flalign}
+\end{dfn}
+\begin{dfn}
+    抽象単体複体とは, 有限集合$V$と$V$の部分集合の集まり$\Sigma$の組($V,\Sigma$)で以下の条件を満たすもののことである.\\
+    \noindent
+    (1)$\forall v\in V$ならば, $\{v\}\in\Sigma$ \\
+    (2)$\forall a\in \Sigma, b\subset a$ならば, $b\in \Sigma$
+\end{dfn}
 
-抽象単体複体\\
-単体写像\\
-部分圏の定義?\\
-次数付き$Z_2[x]加群$\\
-$Z_2[x]$が体であり、$\Vect_{Z_2[x]}$がベクトル空間であること?\\
+\noindent\\
+$\mathbb{R}^N$内の有限個のデータXが部分集合の集まり$\Phi=\{B_i\subset \mathbb{R}^N| 
+ i=1,...,m\}$に被覆されている状況を考える. 式で書くと以下のようになる.
+ \begin{equation}
+     X = \bigcup_{i=1}^{m}B_i \notag
+ \end{equation}
+このとき, 頂点集合を$V=\{1,...,m\}$, 単体の集まり$\Sigma$を, 
+\begin{equation}
+   \Sigma = \left\{ \{1,...,k\} \middle| \bigcap_{i=1}^{k}B_{i} \neq \emptyset \right\} 
+ \notag
+ \end{equation}
+とすると($\emptyset$ は空集合の意), これは抽象単体複体となる. この抽象単体複体を$\Phi$の脈体と呼び, $\mathcal{N}(\Phi)$で表す. 
+\begin{thm}
+    (脈体定理) $X\subset \mathbb{R}^N$が凸閉集合の有限個の集まり$\Phi=\{B_i\subset \mathbb{R}^N| i=1,...,m\}$に被覆されているとき, $X$と$\mathcal{N}(\Phi)$はホモトピー同値となる.
+\end{thm}
+以上よりデータからホモトピー不変な量を調べる時は, 定理の仮定を満たす$X$を作り脈体に変換してから調べてよいこととなる. 一般的に, 脈体はもとのデータより扱いやすく特に計算機との相性が良い. 脈体定理の証明は[ここに参考文献]を参照されたい. \\
+
+
+
 忠実充満\\
 
 
 
 \section{結果 Result}
 $P$とは次のように定義する圏である.対象が1,2,...,nの自然数, 射が$i \leq j$ ならば,  $i\rightarrow j(i, j \in \mathbb{N})$とする. 前述の通り, 射の合成の存在と射が満たすべき二つの法則は満たされる. 以上から$P$を圏として定義する. \\
-$\SimpComp$とは次のように定義する. 対象が抽象単体複体, 射が単体写像とする. 写像が射としての性質をことごとく満たすため, ここで証明は割愛する. 以上から$\SimpComp$を圏として定義する.\\
-$\Vect$とは対象がベクトル空間, 射が線形写像の圏である. 各法則については上記の$\SimpComp$同様に確認できる. \\
+$\SimpComp$とは次のように定義する. 対象が抽象単体複体, 射が単体写像とする. 
+単体写像と単体写像の合成が, 単体写像になるか確認する. 単体写像の定義から, $f:K\rightarrow K'$, $f':K'\rightarrow K''$を単体写像とすると$\forall\sigma =\{a_0,...,a_q\}\in K\Rightarrow \{f(a_0),...,f(a_q)\}\in K'\Rightarrow\{f'(f(a_0)),...,f'(f(a_q))\}\in K''\Rightarrow\{f'\circ f(a_0),...,f'\circ f(a_q)\}\in K''$となるため, これは定義を満たし, $f'\circ f:K\rightarrow K''$も単体写像となる. 次に$K\xrightarrow[]{f} K'\xrightarrow[]{g} K''\xrightarrow[]{h}K'''$のとき, $K$の任意の頂点$a_i$について$(h\circ g)\circ f(a_i)=(h\circ g)(f(a_i))=h\circ g\circ f(a_i)$かつ, $h\circ (g\circ f)(a_i)=h(g\circ f(a_i))=h\circ g\circ f(a_i)$より, $(h\circ g)\circ f=h\circ (g\circ f)$となって結合法則が満たされる. また$1_K:K\rightarrow K, 1_K':K'\rightarrow K'$のとき, $f\circ 1_K(a_i)=f(a_i)$かつ$1_{K'}\circ f(a_i)=1_{K'}(f(a_i))=f(a_i)$より, $f\circ 1_K=1_{K'}\circ f=f$となって単位法則も満たされた. 以上より, SimpCompは圏として定義する.\\
+$\Vect$とは対象がベクトル空間, 射が線形写像の圏である. 線形写像の合成が線形写像になるか確認する. $f:V\rightarrow V'$, $f':V'\rightarrow V''$を線形写像とし, $a, b$をスカラー, $x, y\in V$とすると線形写像の定義から, $f'\circ f(ax+by)=f'(a(x)+bf(y))=af'(f(x))+bf'(f(y))=a(f'\circ f)(x)+b(f'\circ f)(y)$となるため, これは定義を満たし$f'\circ f:V\rightarrow V''$も線形写像となる. 結合法則, 単位法則については上と同様. 以上よりVectは圏として定義する. \\
+$\SimpComp$から$\Vect$への関手を1つ具体的に定義する. $H_q:\SimpComp \rightarrow \Vect$とする. 圏$\SimpComp$の任意の射$f:K\rightarrow K'$ならば, 圏Vectで$H_q(f):H_q(K)\rightarrow H_q(K')$である. $H_q(f)$が関手となるため満たすべき条件は二つ. (1)$K\xrightarrow[]{f}K'\xrightarrow[]{f'}K"$ならば, $H_q(f'\circ f) = H_q(f')\circ H_q(f)$. (2) $1_K:K\rightarrow K$ならば, $H_q(1_K)=1_{H_q(K)}$. 今, $H_q(f)$を$K$の単体$z$を用いて, 
+\begin{equation}
+    \begin{array}{llll}
+         H_q(f):& H_q(K) & \longrightarrow & H_q(K') \\
+        & \rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$} \\
+        & [z] & \longmapsto & [f_q(z)]\\
+    \end{array}
+\end{equation}
+と定義する. $K\xrightarrow[]{f}K'\xrightarrow[]{f'}K"$のとき, $H_q(f')\circ H_q(f)([z]) = H_q(f')([f_q(z)]) = [f'_q\circ f_q(z)]$となる. 一方$H_q(f'\circ f) ([z])  = [ (f'\circ f)_q(z)]$となるため, (1)を示すためには$f'_q\circ f_q=(f'\circ f)_q$の確認が急務となる. $f_q$は単体写像が誘導するチェイン群の準同型写像. $q$次元の鎖群$C_q(K)$を用いて $f_q:C_q(K)  \longrightarrow C_q(K')$と表し,
+\begin{equation}
+    f_q(\langle a_0...a_q\rangle)=\left\{
+    \begin{array}{c l}	
+    \langle f(a_0)...f(a_q)\rangle & (f(a_0),...,f(a_q)が相異なるとき)\\
+    0 & (そうでないとき)
+\end{array}\right.
+\end{equation}
+と定義する. $f'_q\circ f_q(\langle a_0...a_q\rangle)$は$f(a_0),...,f(a_q)$が相異なるとき$f'_q(\langle f(a_0)...f(a_q)\rangle)$で, そうでないとき$f'_q(0)$である. さらに$f'_q(\langle f(a_0)...f(a_q)\rangle)$は, $f'\circ f(a_0),...,f'\circ f(a_q)$が相異なるとき$\langle f'\circ f(a_0)...f'\circ f(a_q)\rangle$で, そうでないとき0である. また$f$は単体写像であるため$f'_q(0)=f(0)=0$となる. よって, $f'_q\circ f_q(\langle a_0...a_q\rangle)$は$f'\circ f(a_0),...,f'\circ f(a_q)$が相異なるとき$\langle f'\circ f(a_0)...f'\circ f(a_q)\rangle$で, そうでないとき0と書くことができる. そうしてこれは, $(f'\circ f)_q(\langle a_0...a_q\rangle)$と等しいため, $f'_q\circ f_q=(f'\circ f)_q$がいえる. よって(1)の$K\xrightarrow[]{f}K'\xrightarrow[]{f'}K"$ならば, $H_q(f'\circ f) = H_q(f')\circ H_q(f)$は満たされた.\\
+次に$1_K:K\rightarrow K$のとき, $H_q(1_K):H_q(K)\rightarrow H_q(K)$で$H_q(1_K)([z])=[1_K(z)]=[z]$となる. これは恒等写像の性質を満たすため, $H_q(1_K)=1_{H_q(K)}$がいえる. よって(2)も満たすことができたので, $H_q:\SimpComp\rightarrow \Vect$は関手と定義できる. これをホモロジー関手と呼ぶ.\\
 \noindent\\
-次に関手を考える.\\
-$P\rightarrow \SimpComp$とは, $P$から$\SimpComp$への関手である. 前述の通り, いくつかの条件を満たし定義される. 同様に$P \rightarrow \Vect$の関手も定義する. \\
-ここから関手を対象とした圏へ拡張する. \\
-$\Fun{P}{\SimpComp}$とは次のように定義する圏である. 対象が$P$から$\SimpComp$への関手, 射が自然変換とする. 自然変換は, 圏$\SimpComp$の射で構成されるため, 射の合成の存在と射が満たすべき二つの法則は満たされる. 以上から$\Fun{P}{\SimpComp}$を圏として定義する. 同様に$\Fun{P}{\Vect}$も圏として定義する. \\
+次に数字を割りあてた単体複体からのホモロジー関手を考える.\\
+$P\rightarrow \SimpComp$とは, $P$から$\SimpComp$への関手である. 前述の通り, いくつかの条件を満たし定義される. 同様に$P \rightarrow \Vect$の関手も定義する. ここから関手を対象とした圏へ拡張する. $\Fun{P}{\SimpComp}$とは次のように定義する圏である. 対象が$P$から$\SimpComp$への関手, 射が自然変換とする. 自然変換は, 圏$\SimpComp$の射で構成されるため, 射の合成の存在と射が満たすべき二つの法則は満たされる. 以上から$\Fun{P}{\SimpComp}$を圏として定義する. 同様に$\Fun{P}{\Vect}$も圏として定義する. \\
 \noindent\\
-この二つの圏の間の関手を考える. \\
-$\Fun{P}{\SimpComp}\rightarrow \Fun{P}{\Vect}$とは一つの関手だが, これは単体複体からベクトル空間のホモロジーを計算することを表しているといえる.\\
-\noindent\\
-さらに, $\SimpComp$からフィルトレーションのみを抽出するため, 射を包含写像に限定した$\SimpCompInc$を定義する. $\SimpCompInc$とは対象が単体複体, 射が包含写像の圏である. 圏SimpCompIncの対象, 射, 射の合成, 恒等射はいつでも圏SimpCompに属するため, その部分圏といえる. 同様に $\Fun{P}{\SimpCompInc}\subset \Fun{P}{\SimpComp}$.\\
-また$\Fun{P}{\SimpCompInc} \rightarrow \Fun{P}{\Vect}$とは一つの関手だが, これは単体複体のフィルトレーションからのベクトル空間のパーシステントホモロジーを計算することを表しているといえる. \\
+この二つの圏の間の関手$H_q:\Fun{P}{\SimpComp}\rightarrow \Fun{P}{\Vect}$は,
+\begin{equation}
+    \begin{array}{llll}
+         H_q:& \Fun{P}{\SimpComp} & \longrightarrow & \Fun{P}{\Vect} \\
+        & \rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$} \\
+        & \mathbb{K}& \longmapsto & H_q(\mathbb{K})\\
+         & =\{K_0\rightarrow ...\rightarrow K_n\} &  & =\{Hq(K_0)\rightarrow ...\rightarrow H_q(K_n)\}\\
+    \end{array}
+\end{equation}
+となる. 前に定義したようにこの関手は単体複体からホモロジーを計算することを表している. 関手圏とすることで, 列ごとの計算に拡張できた. しかし, SimpCompの射は単体写像であるためこのままでは単なる列である. 
+そこでさらに, $\SimpComp$からフィルトレーションのみを抽出するため, 射を包含写像に限定した$\SimpCompInc$を定義する. $\SimpCompInc$とは対象が単体複体, 射が包含写像の圏である. 圏SimpCompIncの対象, 射, 射の合成, 恒等射はいつでも圏SimpCompに属するため, その部分圏といえる. 同様に $\Fun{P}{\SimpCompInc}\subset \Fun{P}{\SimpComp}$. これにより$\Fun{P}{\SimpCompInc} \rightarrow \Fun{P}{\Vect}$は単体複体のフィルトレーションからのベクトル空間のパーシステントホモロジーを計算することを表しているといえる. \\
 
 以上で, ベクトル空間でのパーシステントホモロジーの計算を圏論の言葉で書き表すことができた. ここからは, 次数付き$\mathbb{Z}_2[x]$加群でのパーシステントホモロジーの計算を圏論で表現し, その違いや関係性をあらわにしていきたい.\\
 \noindent\\
-$\grmodZ$とは以下のように定義する圏である. 対象が次数付き$\mathbb{Z}_2[x]$加群, 射が次数付き$\mathbb{Z}_2[x]$準同型写像とする. 合成や法則については今回も写像を利用し詳細は割愛する. 以上から$\grmodZ$は圏として定義する. \\
+$\grmodZ$とは以下のように定義する圏である. 対象が次数付き$\mathbb{Z}_2[x]$加群, 射が次数付き$\mathbb{Z}_2[x]$準同型写像とする. 次数付き$\mathbb{Z}_2[x]$準同型写像の合成が再び次数付き$\mathbb{Z}_2[x]$準同型写像となるか確認する. 次数付き$\mathbb{Z}_2[x]$準同型写像の定義から,
+
+
+
 $\Vect_{\mathbb{Z}_2}$とは対象が係数$\mathbb{Z}_2$のベクトル空間, 射が線形写像の圏である. $\Vect$では係数について言及しなかったが, 今回は係数が$\mathbb{Z}_2$であることを留意したい.\\
 また, 前回同様$\Fun{P}{Vect_{\mathbb{Z}_2}}$も圏として定義する.\\
 \noindent\\
